@@ -1,0 +1,17 @@
+<div class="messages">
+    <% if @errors.any? %>
+      <% @errors.each do |error| %>
+          <div class="alert alert-danger" role="alert"><%= error %></div>
+      <% end %>
+    <% end %>
+    <% if @messages.any? %>
+      <% @messages.each do |message| %>
+        <div class="alert alert-success" role="alert"><%= message %></div>
+      <% end %>
+    <% end %>
+    <% if @info.any? %>
+      <% @info.each do | inf | %>
+        <div class="alert alert-info" role="alert"><%= inf %></div>
+      <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,39 @@
+<% if @containers.any? %>
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Destroy</th>
+            <th>Info</th>
+        </thead>
+        <tbody>
+            <%
+                row = 0
+                @containers.each do |c|
+                    row += 1
+                    projects = c.info
+            %>
+                <tr class="<%= @name == c.name ? 'info' : '' %>" id="<%= c.name %>" >
+                    <td><%= row %></td>
+                    <td class="name">
+                        <%= c.name %>
+                    </td>
+                    <td class="status">
+                        <span> <%= c.status %> </span>
+                    </td>
+                    <td class="controls">
+                        <a href="/destroy/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>
+                    </td>
+                    <td>
+                        <a href="/info/<%= c.id %>"><i class="mdi-action-info"></i></a>
+                    </td>
+                    <td class="id hidden">
+                       <span><%= c.id %></span>
+                   </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/create">Start a new container</a>
+<% end %>
