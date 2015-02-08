@@ -3,7 +3,12 @@
         <thead>
             <th>#</th>
             <th>Name</th>
+            <th>Image</th>
+            <th>Cmd</th>
+            <th>Ports</th>
             <th>Status</th>
+            <th>Exit Code</th>
+            <th>Restart</th>
             <th>Destroy</th>
             <th>Info</th>
         </thead>
@@ -19,8 +24,23 @@
                     <td class="name">
                         <%= c.name %>
                     </td>
+                    <td class="image">
+                        <%= c.data['Config']['Image'] %>
+                    </td>
+                    <td class="cmd">
+                        <%= c.data['Config']['Cmd'].join(", ") %>
+                    </td>
+                    <td class="ports">
+                        <%= c.data['Config']['ExposedPorts'].map {|k,v| k }.join(", ") %>
+                    </td>
                     <td class="status">
                         <span> <%= c.status %> </span>
+                    </td>
+                    <td class="exit">
+                        <%= c.data['State']['ExitCode'] %>
+                    </td>
+                    <td class="restart">
+                      <a href="/restart/<%= c.id %>"><i class="mdi-action-autorenew"></i></a>
                     </td>
                     <td class="controls">
                         <a href="/destroy/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>

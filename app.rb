@@ -40,12 +40,25 @@ post "/create" do
     p params[:image]
     pull_image(params[:image])
     container = catch_not_found { Eva::Image.create(params[:image]) }
-    container = Eva::Container.new(params)
+    container = Eva::Create.new(params)
     container.start
   rescue => e
     halt(409, {error: e.message}.to_json)
   end
   redirect '/'
+end
+
+get "/restart/:id" do
+
+  id = params[:id]
+
+  begin
+    container = Docker::Container.get id
+    container.restart
+  rescue
+    session[:errors] = ["There was a problem, please try again."]
+  end
+  redirect "/"
 end
 
 get "/destroy/:id" do

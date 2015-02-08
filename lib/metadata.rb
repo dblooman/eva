@@ -31,6 +31,10 @@ module Eva
       @container.info["Status"]
     end
 
+    def data
+      @container.json
+    end
+
     def id
       @container.id
     end
