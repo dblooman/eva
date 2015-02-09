@@ -28,7 +28,7 @@
             <%= c.data['Config']['Cmd'].join(", ") %>
           </td>
           <td class="ports">
-            <%= c.data['Config']['ExposedPorts'].map {|k,v| k }.join(", ") %>
+            <%= c.data['Config']['ExposedPorts'].map {|k,v| k }.join(", ") unless c.data['Config']['ExposedPorts'].nil? %>
           </td>
           <td class="status">
             <%= c.status %>

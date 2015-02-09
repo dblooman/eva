@@ -13,6 +13,7 @@ Dir.glob('./app/controllers/*.rb').each { |file| require file }
 
 map('/') { run IndexController }
 map('/create') { run CreateController }
-map('/restart') { run ContainerController }
+map('/container') { run ContainerController }
 map('/info') { run InfoController }
+map('/images') { run ImagesController }
 map('/images') { run ImagesController }

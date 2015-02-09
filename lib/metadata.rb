@@ -38,7 +38,7 @@ module Eva
     end
 
     def logs
-      CGI.escapeHTML(container.logs(:stdout => 1))
+      CGI.escapeHTML(container.logs(:stdout => 1, :tail => 20, :timestamps => 1 ))
     end
   end
 end
