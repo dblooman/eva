@@ -7,10 +7,10 @@ module Eva
     end
 
     def name
-      if @container.info["Name"] || @container.info["Names"]
-        container_info = @container.info
+      if container.info["Name"] || container.info["Names"]
+        container_info = container.info
       else
-        container_info = @container.json
+        container_info = container.json
       end
 
       name = container_info["Name"]
@@ -26,32 +26,19 @@ module Eva
     end
 
     def status
-      @container.info["Status"]
+      container.info["Status"]
     end
 
     def data
-      @container.json
+      container.json
     end
 
     def id
-      @container.id
+      container.id
     end
 
     def logs
       CGI.escapeHTML(container.logs(:stdout => 1))
-    end
-
-    def to_hash
-      {
-        :name   => name,
-        :links  => {
-          :mobile  => mobile_link,
-          :desktop => desktop_link
-        },
-        :info   => info,
-        :status => status,
-        :id     => id
-      }
     end
   end
 end

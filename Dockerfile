@@ -4,4 +4,4 @@ EXPOSE 4567
 
 WORKDIR /usr/src/app/
 
-CMD ["ruby", "app.rb"]
+CMD ["bundle", "exec", "thin", "start"]

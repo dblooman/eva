@@ -24,10 +24,10 @@
             <%= Time.at(c.info['Created']).strftime("%m/%d/%Y") %>
           </td>
           <td class="update">
-            <a href="/update/<%= c.info['RepoTags'].join(", ") %>"><i class="mdi-action-autorenew"></i></a>
+            <a href="/images/update/<%= c.info['RepoTags'].join(", ") %>"><i class="mdi-action-autorenew"></i></a>
           </td>
           <td class="controls">
-            <a href="/delete/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>
+            <a href="/images/delete/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>
           </td>
           <td class="id hidden">
             <span><%= c.id %></span>
