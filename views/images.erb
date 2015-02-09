@@ -1,0 +1,39 @@
+<% if @images.any? %>
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Image</th>
+      <th>Size</th>
+      <th>Created</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% row = 0 %>
+      <% @images.each do |c| %>
+        <% row += 1 %>
+        <tr class="<%= c.info['RepoTags'].join(", ") %>" id="<%= c.info['RepoTags'].join(", ") %>" >
+          <td><%= row %></td>
+          <td class="image">
+            <%= c.info['RepoTags'].join(", ") %>
+          </td>
+          <td class="size">
+            <%= Filesize.from("#{c.info['VirtualSize']} B").to_s('MB') %>
+          </td>
+          <td class="created">
+            <%= Time.at(c.info['Created']).strftime("%m/%d/%Y") %>
+          </td>
+          <td class="update">
+            <a href="/update/<%= c.info['RepoTags'].join(", ") %>"><i class="mdi-action-autorenew"></i></a>
+          </td>
+          <td class="controls">
+            <a href="/delete/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>
+          </td>
+          <td class="id hidden">
+            <span><%= c.id %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

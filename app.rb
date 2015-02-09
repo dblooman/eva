@@ -4,6 +4,8 @@ require "sinatra/namespace"
 require "sinatra/config_file"
 require "sinatra/namespace"
 require "docker"
+require 'filesize'
+require 'eventmachine'
 
 Dir.glob("./lib/*.rb").each { |file| require file }
 
@@ -74,6 +76,34 @@ get "/destroy/:id" do
   end
   redirect "/"
 end
+
+get "/info/:id" do
+  begin
+    container = Docker::Container.get(params[:id])
+    @container = Eva::ContainerMetadata.new(container)
+  rescue Docker::Error::NotFoundError
+    @errors << "Container not found"
+  end
+  erb :logs
+end
+
+get "/images" do
+  @images = Docker::Image.all.map do |container|
+    container
+  end.compact
+  erb :images
+end
+
+get "/update/*" do
+  begin
+    Docker::Image.create("fromImage" => "#{params[:splat].first}")
+  rescue
+    p 'ph'
+    session[:errors] = ["There was a problem, please try again."]
+  end
+  redirect "/images"
+end
+
 
 def pull_image(tag)
   catch_not_found { Eva::Image.create(tag) }

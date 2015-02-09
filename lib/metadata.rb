@@ -23,8 +23,6 @@ module Eva
 
     def info
       []
-      # info_conf_path = @config["run_script_path"] + "#{name}/info.json"
-      # JSON.parse(File.read(info_conf_path)) if File.exist? info_conf_path
     end
 
     def status
@@ -40,7 +38,7 @@ module Eva
     end
 
     def logs
-      CGI.escapeHTML(@container.logs(:stdout => 1))
+      CGI.escapeHTML(container.logs(:stdout => 1))
     end
 
     def to_hash

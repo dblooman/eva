@@ -15,6 +15,7 @@ GEM
       json
     eventmachine (1.0.6)
     excon (0.44.1)
+    filesize (0.0.4)
     json (1.8.2)
     method_source (0.8.2)
     multi_json (1.10.1)
@@ -74,6 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   docker-api
+  filesize
   pry
   rake
   rspec

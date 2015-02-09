@@ -5,6 +5,8 @@ gem "sinatra-contrib"
 gem "thin"
 gem "docker-api"
 gem "rake"
+gem "filesize"
+gem "eventmachine"
 
 group :test do
   gem "rubocop"
