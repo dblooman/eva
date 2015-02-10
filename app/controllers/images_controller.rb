@@ -10,9 +10,8 @@ class ImagesController < ApplicationController
     name = params[:splat].first
 
     begin
-      Thread.new { Docker::Image.create("fromImage" => name) }
+      DockerRunner.pull(name)
     rescue
-      p "ph"
       session[:errors] = ["There was a problem, please try again."]
     end
     redirect "/images"

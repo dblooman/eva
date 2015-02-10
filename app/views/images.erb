@@ -15,7 +15,7 @@
         <tr class="<%= c.info['RepoTags'].join(", ") %>" id="<%= c.info['RepoTags'].join(", ") %>" >
           <td><%= row %></td>
           <td class="image">
-            <%= c.info['RepoTags'].join(", ") %>
+            <%= c.info['RepoTags'].first %>
           </td>
           <td class="size">
             <%= Filesize.from("#{c.info['VirtualSize']} B").to_s('MB') %>
@@ -24,7 +24,7 @@
             <%= Time.at(c.info['Created']).strftime("%m/%d/%Y") %>
           </td>
           <td class="update">
-            <a href="/images/update/<%= c.info['RepoTags'].join(", ") %>"><i class="mdi-action-autorenew"></i></a>
+            <a href="/images/update/<%= c.info['RepoTags'].first %>"><i class="mdi-action-autorenew"></i></a>
           </td>
           <td class="controls">
             <a href="/images/delete/<%= c.id %>"><i class="mdi-navigation-cancel"></i></a>
