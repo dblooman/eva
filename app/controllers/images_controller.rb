@@ -10,9 +10,21 @@ class ImagesController < ApplicationController
     name = params[:splat].first
 
     begin
-      Thread.new { Docker::Image.create("fromImage" => name) }
+      DockerRunner.pull(name)
+      session[:messages] = ["Image Updated"]
     rescue
-      p "ph"
+      session[:errors] = ["There was a problem, please try again."]
+    end
+    redirect "/images"
+  end
+
+  get "/delete/*" do
+    name = params[:splat].first
+
+    begin
+      DockerRunner.destroy(name)
+      session[:messages] = ["Image Destroyed"]
+    rescue
       session[:errors] = ["There was a problem, please try again."]
     end
     redirect "/images"
