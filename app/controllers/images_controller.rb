@@ -11,6 +11,19 @@ class ImagesController < ApplicationController
 
     begin
       DockerRunner.pull(name)
+      session[:messages] = ["Image Updated"]
+    rescue
+      session[:errors] = ["There was a problem, please try again."]
+    end
+    redirect "/images"
+  end
+
+  get "/delete/*" do
+    name = params[:splat].first
+
+    begin
+      DockerRunner.destroy(name)
+      session[:messages] = ["Image Destroyed"]
     rescue
       session[:errors] = ["There was a problem, please try again."]
     end

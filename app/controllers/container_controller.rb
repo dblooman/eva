@@ -5,6 +5,7 @@ class ContainerController < ApplicationController
     begin
       container = Docker::Container.get id
       container.restart
+      session[:messages] = ["Container restarted"]
     rescue
       session[:errors] = ["There was a problem, please try again."]
     end

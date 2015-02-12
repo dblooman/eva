@@ -11,7 +11,7 @@ Sidekiq.configure_server do |config|
   config.redis = { :namespace => "x" }
 end
 
-class DockerWorkers
+class CreateWorkers
   include Sidekiq::Worker
 
   def perform(name)
@@ -19,8 +19,21 @@ class DockerWorkers
   end
 end
 
+class DestroyWorkers
+  include Sidekiq::Worker
+
+  def perform(name)
+    image = Docker::Image.get(name)
+    image.remove(:force => true)
+  end
+end
+
 class DockerRunner
   def self.pull(name)
-    DockerWorkers.perform_async(name)
+    CreateWorkers.perform_async(name)
+  end
+
+  def self.destroy(name)
+    DestroyWorkers.perform_async(name)
   end
 end
