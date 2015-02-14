@@ -9,7 +9,7 @@ Docker web control
 Start server
 
 ```sh
-bundle exec thin start
+ruby app.rb
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
