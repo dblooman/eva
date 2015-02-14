@@ -4,4 +4,4 @@ EXPOSE 3000
 
 WORKDIR /usr/src/app/
 
-CMD ["bundle", "exec", "thin", "start"]
+CMD ["ruby", "app.rb"]
