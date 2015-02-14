@@ -94,7 +94,7 @@ class EvaApp < Sinatra::Base
     @create_output = ""
 
     block = proc do |chunk|
-      create_output << chunk
+      @create_output << chunk
     end
 
     create_image = proc do
