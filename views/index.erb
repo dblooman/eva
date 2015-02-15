@@ -6,6 +6,7 @@
       <th>Image</th>
       <th>Cmd</th>
       <th>Ports</th>
+      <th>Links</th>
       <th>Status</th>
       <th>Exit Code</th>
       <th>Restart</th>
@@ -30,6 +31,10 @@
           <td class="ports">
             <%= c.data['Config']['ExposedPorts'].map {|k,v| k }.join(", ") unless c.data['Config']['ExposedPorts'].nil? %>
           </td>
+          <td class="links">
+            <% a = c.data['HostConfig']['Links'].join(", ").rpartition(':') unless c.data['HostConfig']['Links'].nil? %>
+            <%= a ? c.name + " ==> " + a.first[1..-1] : 'none' %>
+          </td>
           <td class="status">
             <%= c.status %>
           </td>
@@ -52,5 +57,4 @@
       <% end %>
     </tbody>
   </table>
-  <a class="btn btn-primary" href="/create">Start a new container</a>
 <% end %>
