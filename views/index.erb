@@ -8,7 +8,6 @@
       <th>Ports</th>
       <th>Links</th>
       <th>Status</th>
-      <th>Exit Code</th>
       <th>Restart</th>
       <th>Destroy</th>
       <th>Info</th>
@@ -37,9 +36,6 @@
           </td>
           <td class="status">
             <%= c.status %>
-          </td>
-          <td class="exit">
-            <%= c.data['State']['ExitCode'] %>
           </td>
           <td class="restart">
             <a href="/container/restart/<%= c.id %>"><i class="mdi-action-autorenew"></i></a>

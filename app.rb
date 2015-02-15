@@ -68,7 +68,7 @@ class EvaApp < Sinatra::Base
   end
 
   get "/" do
-    @containers = Docker::Container.all.map do |container|
+    @containers = Docker::Container.all(all: true).map do |container|
       Eva::ContainerMetadata.new(container)
     end.compact
 
