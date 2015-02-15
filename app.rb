@@ -44,11 +44,15 @@ class EvaApp < Sinatra::Base
   enable :sessions
 
   use Rack::Session::Cookie, :expire_after => 1, :secret => "eva"
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    username == "admin" and password == "admin"
+  end
 
   Excon.defaults[:ssl_verify_peer] = false
 
   configure do
     set :threaded, false
+    @@output = []
   end
 
   before do
@@ -82,6 +86,7 @@ class EvaApp < Sinatra::Base
   end
 
   get "/images" do
+    @create_output = @@output
     @images = Docker::Image.all.map do |container|
       container
     end.compact
@@ -91,10 +96,8 @@ class EvaApp < Sinatra::Base
   get "/images/update/*" do
     name = params[:splat].first
 
-    @create_output = ""
-
     block = proc do |chunk|
-      @create_output << chunk
+      @@output << chunk
     end
 
     create_image = proc do
