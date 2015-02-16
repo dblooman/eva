@@ -146,7 +146,7 @@ class EvaApp < Sinatra::Base
     rescue Docker::Error::ArgumentError, Docker::Error::NotFoundError, Excon::Errors::Timeout, Excon::Errors::SocketError
       session[:errors] = ["There was a problem, please try again."]
     end
-    redirect "/container"
+    redirect "/"
   end
 
   get "/container/destroy/:id" do
