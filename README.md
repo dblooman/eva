@@ -5,14 +5,16 @@ Docker web control
 
 ## Running
 
+On Boot2Docker
 
-### Start server
-
-```sh
-ruby app.rb
+```
+docker run --name=eva \
+           -v /var/run:/var/run:rw \
+           -p 8080:3000 \
+           -d davey/eva
 ```
 
-Visit [http://localhost:3000](http://localhost:3000)
+Visit [http://192.168.59.103:8080/](http://192.168.59.103:8080/)
 
 ### Login using
 ```sh
